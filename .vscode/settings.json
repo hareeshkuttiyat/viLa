@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true,
+        "**/target": true,
+        "**/node": true,
+        "**/node_modules": true,
+        "**/gradle": true,
+        "**/bin": true
+    },
+    "java.home": "C:/Program Files/AdoptOpenJDK/jdk-11.0.7.10-hotspot/"
+}
