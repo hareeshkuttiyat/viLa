@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/vila-app-theme.scss"
             ],
             "scripts": []
           },
@@ -60,32 +60,20 @@
                   "maximumError": "10kb"
                 }
               ]
-            },
-            "ml": {
-              "localize": ["ml"],
-              "main": "src/main.ts"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "port": 2080,
-            "browserTarget": "vila-app:build"
+            "port": 4200,
+            "browserTarget": "vila-app:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
               "browserTarget": "vila-app:build:production"
-            },
-            "ml": {
-              "browserTarget": "vila-app:build:ml"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "vila-app:build"
           }
         },
         "test": {
@@ -100,7 +88,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/vila-app-theme.scss"
             ],
             "scripts": []
           }
@@ -130,13 +118,8 @@
             }
           }
         }
-      },
-      "i18n": {
-        "sourceLocale": "en-US",
-        "locales": {
-          "ml": "src/locale/messages.ml.xlf"
-        }
       }
-    }},
+    }
+  },
   "defaultProject": "vila-app"
 }

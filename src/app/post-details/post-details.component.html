@@ -1,0 +1,49 @@
+<div *ngIf="post" >
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ post.postType | translate }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card-subtitle>{{ 'Caption' | translate }}</mat-card-subtitle>
+    <p>
+      {{ post.caption }}
+    </p>
+    <mat-card-subtitle>{{ 'Details' | translate }}</mat-card-subtitle>
+    <p>
+      {{ post.details }}
+    </p>
+    <mat-card-subtitle>{{ 'District' | translate }}</mat-card-subtitle>
+    <p>
+      {{ post.district }}
+    </p>
+    <mat-card-subtitle *ngIf="post.phoneNumber">{{ 'Phone' | translate }}</mat-card-subtitle>
+    <p>
+      {{ post.phoneNumber }}
+    </p>
+    <mat-card-subtitle *ngIf="post.emailId">{{ 'Email' | translate }}</mat-card-subtitle>
+    <p>
+      {{ post.emailId }}
+    </p>
+    <p>
+      {{'If_your_post' | translate }} <a routerLink="/edit-post/{{ post.postId }}" routerLinkActive="active">{{'Edit_or_delete' | translate }}</a>
+    </p>
+
+    <!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your share button code -->
+<div class="fb-share-button"
+data-href="http://vila.farm"
+data-layout="button_count">
+</div>
+  </mat-card-content>
+</mat-card>
+
+</div>

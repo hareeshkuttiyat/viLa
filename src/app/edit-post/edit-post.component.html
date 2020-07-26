@@ -1,0 +1,70 @@
+<form class="vila-form" [formGroup]="submissionForm">
+  <mat-form-field class="vila-full-width">
+    <mat-label>{{'Post_key' | translate }}</mat-label>
+    <input matInput [formControl]="postKey" placeholder="{{'Post_key_tip' | translate }}">
+    <mat-error *ngIf="postKey.hasError('required')">
+      {{'Post_key_required' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field  class="vila-full-width">
+    <mat-label>{{'Post_type' | translate }}</mat-label>
+    <mat-select [formControl]="postType" name="postType">
+      <mat-option *ngFor="let postType of postTypes" [value]="postType">
+        {{postType | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="vila-full-width">
+    <mat-label>{{'Caption' | translate }}</mat-label>
+    <input matInput [formControl]="caption" placeholder="{{'Caption_tip' | translate }}">
+    <mat-error *ngIf="caption.hasError('required')">
+      {{'Caption_required' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="vila-full-width">
+    <mat-label>{{'Details' | translate }}</mat-label>
+    <textarea matInput [formControl]="details" cols="85" rows="5" placeholder="{{'Details_tip' | translate }}"></textarea>
+    <mat-error *ngIf="details.hasError('required')">
+      {{'Details_required' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="vila-full-width">
+    <mat-label>{{'Phone' | translate }}</mat-label>
+    <input [formControl]="phoneNumber" type="tel" matInput placeholder="{{'Phone_tip' | translate }}">
+  </mat-form-field>
+
+  <mat-form-field class="vila-full-width">
+    <mat-label>{{'Email' | translate }}</mat-label>
+    <input [formControl]="emailId" type="email" matInput placeholder="{{'Email_tip' | translate }}">
+    <mat-error *ngIf="emailId.hasError('email') && !emailId.hasError('required')">
+      {{'Email_format_error' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="vila-full-width">
+    <mat-label>{{'District' | translate }}</mat-label>
+    <mat-select [formControl]="district" name="district" >
+      <mat-option value="All_Kerala" >{{'All_Kerala' | translate }}</mat-option>
+      <mat-option value="Kasaragod">{{'Kasaragod' | translate }}</mat-option>
+      <mat-option value="Kannur">{{'Kannur' | translate }}</mat-option>
+      <mat-option value="Wayanad">{{'Wayanad' | translate }}</mat-option>
+      <mat-option value="Kozhikode">{{'Kozhikode' | translate }}</mat-option>
+      <mat-option value="Malappuram">{{'Malappuram' | translate }}</mat-option>
+      <mat-option value="Thrissur">{{'Thrissur' | translate }}</mat-option>
+      <mat-option value="Palakkad">{{'Palakkad' | translate }}</mat-option>
+      <mat-option value="Ernakulam">{{'Ernakulam' | translate }}</mat-option>
+      <mat-option value="Idukki">{{'Idukki' | translate }}</mat-option>
+      <mat-option value="Kottayam">{{'Kottayam' | translate }}</mat-option>
+      <mat-option value="Alappuzha">{{'Alappuzha' | translate }}</mat-option>
+      <mat-option value="Pathanamthitta">{{'Pathanamthitta' | translate }}</mat-option>
+      <mat-option value="Kollam">{{'Kollam' | translate }}</mat-option>
+      <mat-option value="Thiruvananthapuram">{{'Thiruvananthapuram' | translate }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button (click)="updatePost()" mat-raised-button color="accent">{{'Edit_post_button' | translate }}</button>&nbsp;
+  <button (click)="deletePost()" mat-raised-button color="accent">{{'Delete_post_button' | translate }}</button>
+</form>

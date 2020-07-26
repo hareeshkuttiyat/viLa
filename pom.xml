@@ -1,60 +1,90 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.2.RELEASE</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
 
-	<groupId>online.vila</groupId>
-	<artifactId>vila</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>viLa Online</name>
-	<description>viLa project</description>
+  <groupId>farm.vila</groupId>
+  <artifactId>vila</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>viLa Online</name>
+  <description>viLa project</description>
 
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
-		<!-- tag::actuator[] -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<!-- end::actuator[] -->
+    <!-- tag::actuator[] -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!-- end::actuator[] -->
 
-		<!-- tag::tests[] -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- end::tests[] -->
-	</dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
+    </dependency>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+    <!-- tag::tests[] -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <version>2.2.6.RELEASE</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+    <!-- end::tests[] -->
+
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-cosmos</artifactId>
+      <version>4.1.0</version> <!-- Previous working version was 4.0.1-beta.3. DON'T TOUCH THIS. EVEN MINOR VERSION UPGRADES BREAK-->
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-hateoas</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <jvmArguments>
+            -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+          </jvmArguments>
+        </configuration>
       </plugin>
+
       <plugin>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-webapp-maven-plugin</artifactId>
@@ -73,10 +103,10 @@
 
           <!-- Begin of App Settings  -->
           <appSettings>
-             <property>
-                   <name>JAVA_OPTS</name>
-                   <value>-Dserver.port=80</value>
-             </property>
+            <property>
+              <name>JAVA_OPTS</name>
+              <value>-Dserver.port=80</value>
+            </property>
           </appSettings>
           <!-- End of App Settings  -->
           <deployment>
@@ -89,9 +119,9 @@
               </resource>
             </resources>
           </deployment>
-         </configuration>
-       </plugin>
-<!--  			<plugin>
+        </configuration>
+      </plugin>
+      <!--  			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.10.0</version>
@@ -122,19 +152,66 @@
       </execution>
 				</executions>
 			</plugin>
- -->		</plugins>
+ -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <mainClass>farm.vila.DbOperations</mainClass>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <executions>
+          <execution>
+            <goals>
+                  <goal>prepare-agent</goal>
+              </goals>
+          </execution>
+          <execution>
+              <id>report</id>
+              <phase>prepare-package</phase>
+            <goals>
+                  <goal>report</goal>
+              </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
   </build>
 
   <repositories>
     <repository>
-        <id>central</id>
-        <name>Central Repository</name>
-        <url>https://repo.maven.apache.org/maven2/</url>
-        <layout>default</layout>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
+      <id>central</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2/</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
-</repositories>
+  </repositories>
+
+	<reporting>
+		<plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+          <reportSets>
+            <reportSet>
+              <reports>
+                <!-- select non-aggregate reports -->
+                <report>report</report>
+              </reports>
+            </reportSet>
+          </reportSets>
+      </plugin>
+		</plugins>
+	</reporting>
 
 </project>

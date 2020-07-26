@@ -1,0 +1,96 @@
+
+<form [formGroup] = "searchForm" (change)="search()">
+  <mat-grid-list cols="5" rowHeight="50px">
+    <mat-grid-tile [colspan]="1" class="vila-grid-align-right">
+      {{ 'Search' | translate }}
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3">
+      <input type="text" formControlName="q" width="30%" class="w3-input w3-border w3-round-large"/>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" class="vila-grid-align-left">
+      <a (href)="search()" class="w3-bar-item w3-button w3-left"><i class="fa fa-search"></i></a>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- TODO Advanced Search
+  <mat-expansion-panel hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        <a href="#" class="w3-bar-item w3-button w3-left"><i class="fa fa-filter"></i></a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-label>{{'district' | translate }}</mat-label>
+      <mat-select [formControl]="q" name="district">
+        <mat-option value="Kasaragod">{{'Kasaragod' | translate }}</mat-option>
+        <mat-option value="Kannur">{{'Kannur' | translate }}</mat-option>
+        <mat-option value="Wayanad">{{'Wayanad' | translate }}</mat-option>
+        <mat-option value="Kozhikode">{{'Kozhikode' | translate }}</mat-option>
+        <mat-option value="Malappuram">{{'Malappuram' | translate }}</mat-option>
+        <mat-option value="Thrissur">{{'Thrissur' | translate }}</mat-option>
+        <mat-option value="Palakkad">{{'Palakkad' | translate }}</mat-option>
+        <mat-option value="Ernakulam">{{'Ernakulam' | translate }}</mat-option>
+        <mat-option value="Idukki">{{'Idukki' | translate }}</mat-option>
+        <mat-option value="Kottayam">{{'Kottayam' | translate }}</mat-option>
+        <mat-option value="Alappuzha">{{'Alappuzha' | translate }}</mat-option>
+        <mat-option value="Pathanamthitta">{{'Pathanamthitta' | translate }}</mat-option>
+        <mat-option value="Kollam">{{'Kollam' | translate }}</mat-option>
+        <mat-option value="Thiruvananthapuram">{{'Thiruvananthapuram' | translate }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-expansion-panel>
+-->
+</form>
+<mat-divider></mat-divider>
+<mat-chip-list style="margin-left: 5px;">
+  <mat-chip [selectable]="true" [removable]="true" *ngFor="let postTypeCount of postTypeCounts"  (removed)="removePostType(postTypeCount)">
+    {{postTypeCount.postTypePlural | translate }} ({{postTypeCount.count}})
+    <mat-icon matChipRemove>cancel</mat-icon>
+  </mat-chip>
+</mat-chip-list>
+
+<mat-divider></mat-divider>
+
+<div *ngIf="posts else loading">
+  <div *ngFor="let post of posts" class="w3-card-4 w3-hover-shadow">
+
+    <div class="w3-row w3-container" style="margin:10px 0">
+      <div class="w3-col m4 l3" *ngIf="post.picture">
+        <p>
+          <img src="{{post.picture}}" style="width:50%">
+        </p>
+      </div>
+      <div class="w3-col m8 l9">
+        <h2>{{ post.caption }}</h2>
+        <p *ngIf="post.details">
+          {{ post.details }}
+        </p>
+        <a routerLink="/posts/{{ post.postId }}" routerLinkActive="active">
+          {{'More' | translate }}
+        </a>&nbsp;
+        <a *ngIf="post.phoneNumber" href="tel:{{post.phoneNumber}}">
+          <button mat-mini-fab color="primary">
+            <mat-icon>call</mat-icon>
+          </button>
+          {{post.phoneNumber}}
+        </a>
+        <label class="w3-text-grey w3-right"><i>{{'Posted' | translate }}: {{post.postedDate | date: "dd-MMM-yyyy"}}</i></label>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="w3-container w3-center">
+  <button routerLink="/submit" routerLinkActive="active" class="w3-button w3-green w3-round-xlarge">
+    {{'Post_something' | translate }}
+  </button>
+</div>
+
+<ng-template #loading>
+  <div *ngIf="!fetchedPosts; else elseBlock" class="w3-row w3-container" style="margin:50px 0">{{'No_Posts' | translate}}</div>
+  <ng-template #elseBlock> <div class="w3-row w3-container">{{'Loading' | translate }}...</div></ng-template>
+
+ </ng-template>

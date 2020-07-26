@@ -1,0 +1,105 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$vila-app-primary: mat-palette($mat-indigo);
+$vila-app-accent:  mat-palette($mat-green, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$vila-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$vila-app-theme: mat-light-theme($vila-app-primary, $vila-app-accent, $vila-app-warn);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.vila-is-mobile .vila-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.vila-app-name {
+  margin-left: 8px;
+}
+
+.vila-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.vila-is-mobile .vila-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+
+.vila-toolbar-buttons {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  margin-left: 5px;
+}
+
+.vila-grid-align-right > figure.mat-figure {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.vila-grid-align-left > figure.mat-figure {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.vila-grid-align-center > figure.mat-figure {
+  justify-content: center;
+  align-items: center;
+}
+
+.vila-form {
+  min-width: 150px;
+  max-width: 700px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.vila-full-width {
+  width: 100%;
+}
+
+.vila-float {
+  position: fixed;
+  bottom: -4px;
+  right: 1rem;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.vila-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.vila-post-fab {
+  position:absolute;
+  bottom: 5%;
+  right:20%;
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($vila-app-theme);
