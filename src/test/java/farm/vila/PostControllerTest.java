@@ -44,7 +44,7 @@ public class PostControllerTest {
     p1.setCaption("capt");
 
     try {
-      Mockito.when(postModelAssembler.toModel(p1)).thenReturn(new EntityModel<>(p1,
+      Mockito.when(postModelAssembler.toModel(p1)).thenReturn(EntityModel.of(p1,
         linkTo(methodOn(PostController.class).one(p1.getPostId())).withSelfRel(),
         linkTo(methodOn(PostController.class).all("")).withRel("posts")));
 

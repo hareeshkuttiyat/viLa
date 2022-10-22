@@ -52,6 +52,7 @@ public class DbOperationsTest {
       tPost.setCaption("Test caption at " + System.currentTimeMillis());
       tPost.setDetails("Some details");
       tPost.setDistrict("Kasaragod");
+      tPost.setStatus("Active");
 
       int statusCode = dbOperations.createPost(tPost);
 
@@ -75,11 +76,14 @@ public class DbOperationsTest {
       tPost.setCaption("Test caption at " + System.currentTimeMillis());
       tPost.setDetails("Some details");
       tPost.setDistrict("Kasaragod");
+      tPost.setStatus("Active");
 
       dbOperations.createPost(tPost);
 
       //When
       List<Post> posts = dbOperations.listPosts("");
+
+      System.out.println("posts size:" + posts.size());
 
       //Then
       assertTrue(posts.size() >= 1);
@@ -101,6 +105,7 @@ public class DbOperationsTest {
       post.setCaption("Test caption at " + System.currentTimeMillis());
       post.setDetails("Some details");
       post.setDistrict("Kasaragod");
+      post.setStatus("Active");
       post.setPostKey(UUID.randomUUID().toString());
       dbOperations.createPost(post);
 
@@ -133,6 +138,7 @@ public class DbOperationsTest {
       post.setCaption("Test caption at " + System.currentTimeMillis());
       post.setDetails("Some details");
       post.setDistrict("Kannur");
+      post.setStatus("Active");
       post.setPostKey(UUID.randomUUID().toString());
       dbOperations.createPost(post);
 
@@ -163,6 +169,7 @@ public class DbOperationsTest {
       post.setCaption("Test caption at " + System.currentTimeMillis());
       post.setDetails("Some details");
       post.setDistrict("Kannur");
+      post.setStatus("Active");
       post.setPostKey(UUID.randomUUID().toString());
       dbOperations.createPost(post);
 
@@ -189,6 +196,7 @@ public class DbOperationsTest {
       post.setCaption("Test caption at " + System.currentTimeMillis());
       post.setDetails("Some details");
       post.setDistrict("Kannur");
+      post.setStatus("Active");
       post.setPostKey(UUID.randomUUID().toString());
       dbOperations.createPost(post);
 

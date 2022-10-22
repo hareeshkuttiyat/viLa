@@ -121,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "vila-app"
+  "defaultProject": "vila-app",
+  "cli": {
+    "analytics": false
+  }
 }

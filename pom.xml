@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.2.2.RELEASE</version>
+    <version>2.7.5</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
@@ -44,7 +44,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-      <version>2.2.6.RELEASE</version>
+      <version>2.7.5</version>
       <exclusions>
         <exclusion>
           <groupId>org.junit.vintage</groupId>
@@ -56,14 +56,14 @@
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
-      <version>2.4.0</version>
+      <version>2.7.0</version>
     </dependency>
     <!-- end::tests[] -->
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-cosmos</artifactId>
-      <version>4.1.0</version> <!-- Previous working version was 4.0.1-beta.3. DON'T TOUCH THIS. EVEN MINOR VERSION UPGRADES BREAK-->
+      <version>4.38.0</version> <!-- EVEN MINOR VERSION UPGRADES BREAK-->
     </dependency>
 
     <dependency>
@@ -156,7 +156,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>1.6.0</version>
+        <version>3.1.0</version>
         <configuration>
           <mainClass>farm.vila.DbOperations</mainClass>
         </configuration>
@@ -165,7 +165,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.5</version>
+        <version>0.8.8</version>
         <executions>
           <execution>
             <goals>

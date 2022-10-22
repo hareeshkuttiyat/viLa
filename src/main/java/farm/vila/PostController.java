@@ -130,6 +130,6 @@ class PostController {
 
     List<EntityModel<Post>> posts = dbOperations.listPosts(aSearch).stream().map(assembler::toModel)
         .collect(Collectors.toList());
-    return new CollectionModel<EntityModel<Post>>(posts);//, linkTo(methodOn(PostController.class).all()).withSelfRel());
+    return CollectionModel.of(posts);//, linkTo(methodOn(PostController.class).all()).withSelfRel());
   }
 }

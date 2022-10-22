@@ -49,6 +49,7 @@ public class PostControllerIntegrationTest {
     p1.setCaption("ജൈവ" + p1.getPostId());
     p1.setPostKey(UUID.randomUUID().toString());
     p1.setDistrict("some_dist");
+    p1.setStatus("Active");
 
     dbOperations.createPost(p1);
 
@@ -68,15 +69,17 @@ public class PostControllerIntegrationTest {
     p1.setCaption("capt" + p1.getPostId());
     p1.setPostKey(UUID.randomUUID().toString());
     p1.setDistrict("some_dist");
+    p1.setStatus("Active");
     dbOperations.createPost(p1);
 
-    Post p = dbOperations.findPostByPostId(p1.getPostId());
+//    Post p = dbOperations.findPostByPostId(p1.getPostId());
 
     Post p2 = new Post();
     p2.setPostId(p1.getPostId());
     p2.setCaption("new capt" + p1.getPostId());
-    p2.setPostKey(p.getPostKey());
+    p2.setPostKey(p1.getPostKey());
     p2.setDistrict(p1.getDistrict());
+    p2.setStatus("Active");
 
     ObjectMapper mapper = new ObjectMapper();
     mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -88,4 +91,5 @@ public class PostControllerIntegrationTest {
       .andExpect(status().isOk())
       .andExpect(jsonPath("$.caption", equalTo(p2.getCaption())));
   }
+
 }
